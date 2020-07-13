@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <title>Password creation</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                outline: 0;
+                box-sizing: border-box;
+            }
+
+            html, body {
+                min-height: 100%;
+            }
+            body {
+                background: #0B023B;
+                -webkit-font-smoothing: antialised !important;
+            }
+
+            body, input, button {
+                color: #000;
+                font-size: 14px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            button {
+                cursor: pointer;
+            }
+            .container {
+                max-width: 700px;
+                background: #FFF;
+                border-radius: 4px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                padding: 30px;
+                margin: 80px auto;
+            }
+            .container h1 {
+                font-size: 24px;
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+            }
+            .container svg {
+                margin-right: 10px;
+            }
+            .form {
+                margin-top: 30px;
+                display: flex;
+                flex-direction: row;
+            }
+            .form input {
+                flex: 1;
+                border: 1px solid #eee;
+                padding: 10px 15px;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+            .submitbutton {
+                background: #2A05CC;
+                border: 0;
+                padding: 0 5px 0 5px;
+                margin-left: 10px;
+                border-radius: 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #FFF;
+            }
+            
+            .list {
+                padding: 15px 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+            }
+            .list ul {
+                width: 100%;
+            }
+            .list li {
+                padding: 15px 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                border-top: 1px solid #eee;
+                min-width: 100%;
+                font-size: 20px;
+            }
+            .list li div {
+                margin-left: auto;
+            }
+            .list li div button {
+                margin-right: 2px;
+                border: 0;
+                background-color: #F0F0F0;
+                border-radius: 2px;
+            }
+            .list li:nth-child(1) {
+                border-top: 0;
+            }
+
+        </style>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Password Creation</h1>
+            <form class="form" onSubmit="return createPassword(event)">
+                <input type="password" id="input" name="Password" autocomplete="off" 
+                readonly onfocus="this.removeAttribute('readonly');" >
+                <button type="submit" class="submitbutton">Enviar</button>
+            </form>
+            <div class="list" >
+                <ul id="list">
+                   
+                </ul>
+            </div>
+        </div>
+        
+       
+    </body>
+    <script>
+        function createPassword(e) {
+            e.preventDefault();
+            var list = document.getElementById("list");
+            list.innerHTML = "";
+            for(let i=0; i < 5; i++) { 
+                var para = document.createElement("li");
+                var encryptedAES = CryptoJS.AES.encrypt(document.getElementById("input").value, "PerfectKey");
+                var node = document.createTextNode(encryptedAES);
+                para.appendChild(node);
+                list.appendChild(para);
+            }
+           
+        }
+
+        
+    </script>
+</html>
