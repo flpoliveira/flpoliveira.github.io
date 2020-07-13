@@ -81,7 +81,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                justify-content: center;
+                justify-content: left;
                 border-top: 1px solid #eee;
                 min-width: 100%;
                 font-size: 20px;
@@ -97,6 +97,9 @@
             }
             .list li:nth-child(1) {
                 border-top: 0;
+            }
+            .list li strong {
+                margin-right: 10px;
             }
 
         </style>
@@ -124,10 +127,14 @@
             var list = document.getElementById("list");
             var value = document.getElementById("input").value
             list.innerHTML = "";
-            for(let i=0; i < 5; i++) { 
+            var listPassword = ["social", "social2", "games", "games2"]
+            for(let i=0; i < listPassword.length; i++) { 
                 var para = document.createElement("li");
-                var encrypt = window.btoa( value + i  + i*2 + i *3).replace(/=/g, "@"); 
-                var node = document.createTextNode(encrypt.substring(5, encrypt.length));
+                var strong = document.createElement("strong");
+                strong.appendChild(document.createTextNode(listPassword[i]+":"));
+                para.appendChild(strong);
+                var encrypt = window.btoa( value.substring(0, 8) +"@"+listPassword[i]).replace(/=/g, "@"); 
+                var node = document.createTextNode(encrypt.substr(0, 14) + "@@");
                 para.appendChild(node);
                 list.appendChild(para);
             }
