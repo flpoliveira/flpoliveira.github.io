@@ -100,7 +100,6 @@
             }
 
         </style>
-        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
     </head>
     <body>
         <div class="container">
@@ -123,16 +122,22 @@
         function createPassword(e) {
             e.preventDefault();
             var list = document.getElementById("list");
+            var value = document.getElementById("input").value
             list.innerHTML = "";
             for(let i=0; i < 5; i++) { 
                 var para = document.createElement("li");
-                var encryptedAES = CryptoJS.AES.encrypt(document.getElementById("input").value, "PerfectKey");
-                var node = document.createTextNode(encryptedAES);
+                var encrypt = window.btoa( value + i  + i*2 + i *3).replace(/=/g, "@"); 
+                var node = document.createTextNode(encrypt.substring(5, encrypt.length));
                 para.appendChild(node);
                 list.appendChild(para);
             }
            
         }
+        
+
+        
+
+        
 
         
     </script>
