@@ -127,13 +127,13 @@
             var list = document.getElementById("list");
             var value = document.getElementById("input").value
             list.innerHTML = "";
-            var listPassword = ["social", "social2", "games", "games2"]
+            var listPassword = ["socia", "otsoc", "games", "otgam"]
             for(let i=0; i < listPassword.length; i++) { 
                 var para = document.createElement("li");
                 var strong = document.createElement("strong");
                 strong.appendChild(document.createTextNode(listPassword[i]+":"));
                 para.appendChild(strong);
-                var encrypt = window.btoa( value.substring(0, 8) +"@"+listPassword[i]).replace(/=/g, "@"); 
+                var encrypt = window.btoa( value.substring(0, 4) +"@"+listPassword[i]+value.substring(4, value.length)).replace(/=/g, "@"); 
                 var node = document.createTextNode(encrypt.substr(0, 14) + "@@");
                 para.appendChild(node);
                 list.appendChild(para);
